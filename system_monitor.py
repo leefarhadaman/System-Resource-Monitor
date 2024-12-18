@@ -1,15 +1,13 @@
 import tkinter as tk
 from tkinter import Canvas
 import psutil
-from datetime import datetime
-import math
 
 
 class SystemResourceMonitor:
     def __init__(self, root):
         self.root = root
         self.root.title("System Resource Monitor")
-        self.root.geometry("500x500")
+        self.root.geometry("750x400")  # Predefined size to fit everything properly
         self.root.configure(bg="#1E1E1E")  # Dark background for a modern look
         
         # Title
@@ -20,17 +18,21 @@ class SystemResourceMonitor:
             bg="#1E1E1E", 
             fg="#00FF00"
         )
-        self.title_label.pack(pady=20)
+        self.title_label.pack(pady=10)
         
-        # Circular progress bars
-        self.canvas_cpu = self.create_circular_progress_bar(100, "CPU")
-        self.canvas_memory = self.create_circular_progress_bar(200, "Memory")
-        self.canvas_disk = self.create_circular_progress_bar(300, "Disk")
+        # Frame to hold all circular progress bars in a row
+        self.bar_frame = tk.Frame(self.root, bg="#1E1E1E")
+        self.bar_frame.pack(pady=20)
         
-        # Footer
+        # Circular progress bars for CPU, Memory, and Disk
+        self.canvas_cpu = self.create_circular_progress_bar(self.bar_frame, "CPU")
+        self.canvas_memory = self.create_circular_progress_bar(self.bar_frame, "Memory")
+        self.canvas_disk = self.create_circular_progress_bar(self.bar_frame, "Disk")
+        
+        # Footer with your details
         self.footer_label = tk.Label(
             self.root, 
-            text="Developed by Farhad Ali", 
+            text="Developed by Farhad Ali\nInstagram: @dev.faru | Portfolio: devfaru.netlify.app", 
             font=("Helvetica", 10, "italic"), 
             bg="#1E1E1E", 
             fg="#00FF00"
@@ -40,10 +42,10 @@ class SystemResourceMonitor:
         # Start updating stats
         self.update_stats()
     
-    def create_circular_progress_bar(self, y_offset, label):
+    def create_circular_progress_bar(self, parent, label):
         """Create a circular progress bar."""
-        canvas = Canvas(self.root, width=200, height=200, bg="#1E1E1E", highlightthickness=0)
-        canvas.pack(pady=10)
+        canvas = Canvas(parent, width=200, height=200, bg="#1E1E1E", highlightthickness=0)
+        canvas.pack(side="left", padx=20)  # Add space between the bars
         
         # Draw the background circle
         canvas.create_oval(20, 20, 180, 180, outline="#444", width=8)  # Static background circle
