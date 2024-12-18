@@ -14,7 +14,7 @@ A visually appealing Python GUI application to monitor system resources such as 
 
 ### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/leefarhadaman/system-resource-monitor.git
+git clone https://github.com/leefarhadaman/System-Resource-Monitor.git
 cd system-resource-monitor
 ```
 
